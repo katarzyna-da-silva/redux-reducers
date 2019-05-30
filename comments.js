@@ -4,7 +4,7 @@ import {
     EDIT_COMMENT,
     THUMB_UP_COMMENT,
     THUMB_DOWN_COMMENT
-} from './actions';
+} from './action';
 
 // function reducer(state, action) {
 //     if (!state) {
@@ -15,17 +15,17 @@ import {
 
 // es6
 
+// instrukcja switch !!!
 function comments(state = [], action) {
-    switch(action.type) {
-        case ADD_COMMENT:
-            return [{
+    switch (action.type) {   // podejmowanie decyzji na podstawie wartosci jednej zmiennej // tutaj typ, akcji np. dodaj komentarz     ??????????? 
+        case ADD_COMMENT: //  jeśli wartość zmiennej (występującej po słowie kluczowym switch) będzie równa wartości umieszczonej po słowie kluczowym case, to wykonaj kod
+            return [{  // i zwroci to co wg tablicy : 
                 id: action.id,
                 text: action.text,
                 votes: 0
-            }
-            , ...state];
+            }, ...state];
 
-        case REMOVE_COMMENT:
+        case REMOVE_COMMENT: // case => przypadek sprawdzamy switch action.type => z removecomment, jesli sie zgadza wykonaj kod umieszczony na dole 
             return {
                 comments: state.comments.filter(comment => comment.id !== action.id)
             };
@@ -36,6 +36,7 @@ function comments(state = [], action) {
                     if (comments.id === action.id) {
                         comments.text, action.text;
                     }
+                    return comment;
                 })
             };
 
@@ -43,8 +44,9 @@ function comments(state = [], action) {
             return {
                 comments: state.comments.map(comment => {
                     if (comment.id === action.id) {
-                        comment.thumb, comment.add + 1;
+                        comment.thumb++; // to to samo co : comment.thumb, comment.add +1, removed - 1;  przez inkrementacje i dekrementacje
                     }
+                    return comment;
                 })
             };
 
@@ -52,12 +54,13 @@ function comments(state = [], action) {
             return {
                 comments: state.comments.map(comment => {
                     if (comment.id === action.id) {
-                        comment.thumb, comment.removed - 1;
+                        comment.thumb--;
                     }
+                    return comment;
                 })
             };
-
-        default:
+// break : przerywa !!!!  
+        default:  // jesli przypadki sie nie spelnia, to zwraca state
             return state;
     }
 }

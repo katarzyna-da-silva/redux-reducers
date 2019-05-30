@@ -17,7 +17,7 @@ function addComment(text) {
 
 function editComment(id, text) {
     return {
-        type: ADD_COMMENT, // EDIT
+        type: EDIT_COMMENT,
         id,
         text
     }
@@ -29,11 +29,12 @@ function removeComment(id) {
         id
     }
 }
+
 function thumbUpComment(id) {
     return {
         type: THUMB_UP_COMMENT,
         id,
-        thumb: add +1
+        thumb: add + 1  
     }
 }
 
@@ -41,7 +42,7 @@ function thumbDownComment(id) {
     return {
         type: THUMB_DOWN_COMMENT,
         id,
-        thumb: removed -1 
+        thumb: removed - 1
     }
 }
 
